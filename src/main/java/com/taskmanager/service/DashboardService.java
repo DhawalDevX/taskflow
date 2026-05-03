@@ -37,7 +37,11 @@ public class DashboardService {
                 && t.getDueDate().isBefore(LocalDate.now()) && t.getStatus() != TaskStatus.DONE).count();
 
         List<TaskResponse> recentTasks = allTasks.stream()
-                .sorted((a, b) -> b.getCreatedAt().compareTo(a.getCreatedAt()))
+                .sorted((a, b) -> {
+                    if (a.getCreatedAt() == null) return 1;
+                    if (b.getCreatedAt() == null) return -1;
+                    return b.getCreatedAt().compareTo(a.getCreatedAt());
+                })
                 .limit(5).map(taskService::toResponse).collect(Collectors.toList());
 
         return DashboardResponse.builder()
