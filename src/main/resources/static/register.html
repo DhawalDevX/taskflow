@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TaskFlow - Create Account</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+        }
+
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a2e 100%);
+        }
+
+        .bg-animation::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 30%, rgba(0, 212, 255, 0.08) 0%, transparent 50%);
+            animation: rotateBg 20s linear infinite;
+        }
+
+        @keyframes rotateBg {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Floating Particles */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            background: rgba(0, 212, 255, 0.2);
+            border-radius: 50%;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.5; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-100vh) rotate(360deg); opacity: 0; }
+        }
+
+        /* Main Container */
+        .main-container {
+            display: flex;
+            width: 100%;
+            min-height: 100vh;
+        }
+
+        /* Left Section - Welcome Message */
+        .left-section {
+            flex: 1;
+            background: linear-gradient(135deg, rgba(0, 212, 255, 0.15), rgba(0, 100, 255, 0.05));
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .left-section::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(0, 212, 255, 0.05) 0%, transparent 70%);
+            animation: pulseGlow 8s ease-in-out infinite;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { opacity: 0.3; transform: scale(1); }
+            50% { opacity: 0.6; transform: scale(1.1); }
+        }
+
+        .welcome-content {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            animation: fadeInUp 0.8s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-content h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff, #00d4ff, #0080ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 2px;
+        }
+
+        .welcome-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: #fff;
+        }
+
+        .welcome-content p {
+            font-size: 1.1rem;
+            color: #aaa;
+            line-height: 1.6;
+            max-width: 400px;
+            margin-top: 1rem;
+        }
+
+        .welcome-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            color: #00d4ff;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Right Section - Register Card */
+        .right-section {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+        }
+
+        .register-card {
+            background: rgba(15, 25, 45, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 32px;
+            border: 1px solid rgba(0, 212, 255, 0.25);
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            transition: all 0.3s;
+            animation: slideIn 0.6s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateX(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .register-card:hover {
+            border-color: rgba(0, 212, 255, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3), 0 0 30px rgba(0, 212, 255, 0.1);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .card-header h2 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: #fff;
+        }
+
+        .card-header p {
+            color: #888;
+            font-size: 0.9rem;
+        }
+
+        .input-group {
+            margin-bottom: 1.2rem;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 500;
+            color: #aaa;
+            margin-bottom: 0.5rem;
+        }
+
+        .input-group input, .input-group select {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            background: rgba(5, 10, 20, 0.6);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .input-group input:focus, .input-group select:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.1);
+        }
+
+        .input-group select option {
+            background: #1a1a2e;
+        }
+
+        .password-strength {
+            margin-top: 0.5rem;
+            font-size: 0.7rem;
+            color: #888;
+        }
+
+        .register-btn {
+            width: 100%;
+            padding: 0.9rem;
+            background: linear-gradient(135deg, #00d4ff, #0080ff);
+            border: none;
+            border-radius: 40px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .register-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(0, 212, 255, 0.3);
+        }
+
+        .register-btn.loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+
+        .divider {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+
+        .divider-line {
+            flex: 1;
+            height: 1px;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .divider span {
+            color: #666;
+            font-size: 0.8rem;
+        }
+
+        .social-register {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .social-btn {
+            flex: 1;
+            padding: 0.7rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 30px;
+            color: #aaa;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+
+        .social-btn:hover {
+            background: rgba(0, 212, 255, 0.1);
+            border-color: #00d4ff;
+            color: #00d4ff;
+            transform: translateY(-2px);
+        }
+
+        .login-link {
+            text-align: center;
+            margin-top: 1.5rem;
+            font-size: 0.9rem;
+            color: #888;
+        }
+
+        .login-link a {
+            color: #00d4ff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+
+        .error-msg {
+            background: rgba(255, 40, 80, 0.12);
+            border: 1px solid rgba(255, 40, 80, 0.3);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 0.8rem;
+            color: #ff80a0;
+            margin-bottom: 1.2rem;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .error-msg.show {
+            display: flex;
+        }
+
+        .success-msg {
+            background: rgba(0, 212, 255, 0.12);
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            border-radius: 12px;
+            padding: 0.8rem 1rem;
+            font-size: 0.8rem;
+            color: #00d4ff;
+            margin-bottom: 1.2rem;
+            display: none;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .success-msg.show {
+            display: flex;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .main-container {
+                flex-direction: column;
+            }
+            .left-section {
+                padding: 3rem 2rem;
+                min-height: 300px;
+            }
+            .welcome-content h1 {
+                font-size: 2.5rem;
+            }
+            .welcome-content h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .register-card {
+                padding: 1.5rem;
+            }
+            .welcome-content h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="bg-animation"></div>
+<div class="particles" id="particles"></div>
+
+<div class="main-container">
+    <!-- Left Section - Welcome Message -->
+    <div class="left-section">
+        <div class="welcome-content">
+            <div class="welcome-icon">
+                <i class="fas fa-rocket"></i>
+            </div>
+            <h1>WELCOME</h1>
+            <h2>BACK!</h2>
+            <p>Your Gateway to Peak Productivity,The Ultimate Task Management Solution.</p>
+        </div>
+    </div>
+
+    <!-- Right Section - Register Card -->
+    <div class="right-section">
+        <div class="register-card">
+            <div class="card-header">
+                <h2>Create Account</h2>
+                <p>Join TaskFlow today</p>
+            </div>
+
+            <div id="errorMsg" class="error-msg"></div>
+            <div id="successMsg" class="success-msg"></div>
+
+            <div class="input-group">
+                <label><i class="fas fa-user"></i> Full Name</label>
+                <input type="text" id="name" placeholder="John Doe" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-envelope"></i> Email</label>
+                <input type="email" id="email" placeholder="you@example.com" autocomplete="off">
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-lock"></i> Password</label>
+                <input type="password" id="password" placeholder="Min 6 characters" onkeyup="checkPasswordStrength()">
+                <div class="password-strength" id="passwordStrength"></div>
+            </div>
+
+            <div class="input-group">
+                <label><i class="fas fa-user-tag"></i> Role</label>
+                <select id="role">
+                    <option value="MEMBER">👤 Member</option>
+                    <option value="ADMIN">👑 Admin</option>
+                </select>
+            </div>
+
+            <button class="register-btn" id="registerBtn" onclick="handleRegister()">Create Account</button>
+
+            <div class="divider">
+                <div class="divider-line"></div>
+                <span>Or sign up with</span>
+                <div class="divider-line"></div>
+            </div>
+
+            <div class="social-register">
+                <a href="https://github.com" target="_blank" class="social-btn"><i class="fab fa-github"></i> GitHub</a>
+                <a href="https://linkedin.com" target="_blank" class="social-btn"><i class="fab fa-linkedin-in"></i> LinkedIn</a>
+            </div>
+
+            <div class="login-link">
+                Already have an account? <a href="/login.html">Sign In →</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Particles Generation
+    function createParticles() {
+        const container = document.getElementById('particles');
+        for (let i = 0; i < 80; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            const size = Math.random() * 4 + 1;
+            particle.style.width = size + 'px';
+            particle.style.height = size + 'px';
+            particle.style.left = Math.random() * 100 + '%';
+            particle.style.animationDelay = Math.random() * 15 + 's';
+            particle.style.animationDuration = (Math.random() * 10 + 10) + 's';
+            container.appendChild(particle);
+        }
+    }
+    createParticles();
+
+    // Password Strength Checker
+    function checkPasswordStrength() {
+        const password = document.getElementById('password').value;
+        const strengthDiv = document.getElementById('passwordStrength');
+
+        if (password.length === 0) {
+            strengthDiv.innerHTML = '';
+            return;
+        }
+
+        let strength = '';
+        let color = '';
+
+        if (password.length < 6) {
+            strength = '⚠️ Weak - Minimum 6 characters';
+            color = '#ff4466';
+        } else if (password.length < 8) {
+            strength = '🟡 Medium - Add more characters';
+            color = '#ffaa00';
+        } else if (password.match(/[!@#$%^&*]/)) {
+            strength = '✅ Strong - Good password!';
+            color = '#00ff88';
+        } else {
+            strength = '🔵 Good - Add special chars for strong';
+            color = '#00d4ff';
+        }
+
+        strengthDiv.innerHTML = strength;
+        strengthDiv.style.color = color;
+    }
+
+    // Show Message
+    function showMessage(msg, isError, isSuccess = false) {
+        const errorDiv = document.getElementById('errorMsg');
+        const successDiv = document.getElementById('successMsg');
+
+        errorDiv.classList.remove('show');
+        successDiv.classList.remove('show');
+
+        if (isSuccess) {
+            successDiv.textContent = msg;
+            successDiv.classList.add('show');
+            setTimeout(() => successDiv.classList.remove('show'), 3000);
+        } else {
+            errorDiv.textContent = msg;
+            errorDiv.classList.add('show');
+            setTimeout(() => errorDiv.classList.remove('show'), 3000);
+        }
+    }
+
+    // Register Function
+    async function handleRegister() {
+        const name = document.getElementById('name').value.trim();
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+        const role = document.getElementById('role').value;
+        const btn = document.getElementById('registerBtn');
+
+        // Validation
+        if (!name || !email || !password) {
+            showMessage('❌ All fields are required', true);
+            return;
+        }
+
+        if (!email.includes('@') || !email.includes('.')) {
+            showMessage('❌ Please enter a valid email address', true);
+            return;
+        }
+
+        if (password.length < 6) {
+            showMessage('❌ Password must be at least 6 characters', true);
+            return;
+        }
+
+        // Loading state
+        const originalText = btn.innerHTML;
+        btn.classList.add('loading');
+        btn.innerHTML = 'Creating Account...';
+        btn.disabled = true;
+
+        try {
+            const response = await fetch('/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    name: name,
+                    email: email,
+                    password: password,
+                    role: role
+                })
+            });
+
+            const data = await response.json();
+
+            if (!response.ok) {
+                const errorMsg = data.error || 'Registration failed. Try again.';
+                showMessage('❌ ' + errorMsg, true);
+                btn.classList.remove('loading');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            if (data.token) {
+                localStorage.setItem('token', data.token);
+                localStorage.setItem('user', JSON.stringify({
+                    name: data.name || name,
+                    email: data.email || email,
+                    role: data.role || role,
+                    id: data.userId || data.id
+                }));
+
+                showMessage('✅ Account created successfully! Redirecting...', false, true);
+
+                setTimeout(() => {
+                    window.location.href = '/dashboard.html';
+                }, 1500);
+            } else {
+                showMessage('❌ Invalid server response', true);
+                btn.classList.remove('loading');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+            }
+
+        } catch (err) {
+            console.error('Registration error:', err);
+            showMessage('❌ Network error. Make sure backend is running on port 8080', true);
+            btn.classList.remove('loading');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    }
+
+    // Enter key support
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter') {
+            e.preventDefault();
+            handleRegister();
+        }
+    });
+
+    // Redirect if already logged in
+    if (localStorage.getItem('token')) {
+        window.location.href = '/dashboard.html';
+    }
+</script>
+</body>
+</html>
