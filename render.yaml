@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: taskflow-app
+    runtime: image
+    repo: https://github.com/DhawalDevX/taskflow
+    plan: free
+    buildCommand: mvn clean package -DskipTests
+    startCommand: java -jar target/*.jar
+    envVars:
+      - key: PORT
+        value: 10000
+      - key: JWT_SECRET
+        value: 404E635266556A586E3272357538782F413F4428472B4B6250645367566B5970
